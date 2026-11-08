@@ -1,0 +1,6 @@
+{
+  "version": "2.4.1",
+  "androidVersionCode": 20401,
+  "productionRuntime": "pos-system-isfinals-production-1",
+  "developmentRuntime": "pos-system-isfinals-development-1"
+}

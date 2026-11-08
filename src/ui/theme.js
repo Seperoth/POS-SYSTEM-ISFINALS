@@ -1,0 +1,38 @@
+import { StyleSheet } from 'react-native';
+export const color = { ink: '#202124', muted: '#6b6d70', line: '#dedfe1', bg: '#f4f4f4', paper: '#ffffff', active: '#3c3d3e', green: '#15803d', red: '#b42318' };
+export const categoryColors = {
+  FOOD: { solid: '#b42318', tint: '#fff1f0' },
+  DRINKS: { solid: '#1d4ed8', tint: '#eff6ff' },
+  CONFECTIONERY: { solid: '#166534', tint: '#f0fdf4' },
+  EXTRAS: { solid: '#7e22ce', tint: '#faf5ff' },
+};
+export const s = StyleSheet.create({
+  app: { flex: 1, backgroundColor: color.bg }, row: { flexDirection: 'row', alignItems: 'center', gap: 12 }, wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
+  text: { fontFamily: 'Roboto', fontSize: 15, lineHeight: 22, color: color.ink }, muted: { color: color.muted }, small: { fontSize: 13, lineHeight: 19 },
+  title: { fontFamily: 'RobotoBold', fontSize: 24, lineHeight: 30 }, h2: { fontFamily: 'RobotoBold', fontSize: 19, lineHeight: 26 }, bold: { fontFamily: 'RobotoBold' },
+  button: { minHeight: 56, paddingHorizontal: 18, paddingVertical: 15, borderWidth: 1, borderColor: color.line, backgroundColor: color.paper, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8 },
+  primary: { backgroundColor: color.active, borderColor: color.active }, buttonText: { fontFamily: 'RobotoMedium', fontSize: 17, lineHeight: 24, color: color.ink }, white: { color: '#fff' },
+  disabled: { opacity: 0.45 }, field: { minHeight: 54, borderWidth: 1, borderColor: color.line, padding: 14, fontFamily: 'Roboto', fontSize: 18, color: color.ink, backgroundColor: color.paper, borderRadius: 0 },
+  label: { fontFamily: 'RobotoMedium', fontSize: 14, color: color.ink, marginBottom: 6 }, fieldGroup: { gap: 0, marginBottom: 16 },
+  panel: { backgroundColor: color.paper, borderWidth: 1, borderColor: color.line, padding: 20 }, divider: { height: 1, backgroundColor: color.line, marginVertical: 16 },
+  page: { padding: 24, gap: 20, paddingBottom: 32 }, header: { minHeight: 72, borderBottomWidth: 1, borderColor: color.line, backgroundColor: color.paper, paddingHorizontal: 24, justifyContent: 'center', gap: 4 },
+  nav: { minHeight: 80, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', paddingHorizontal: 12, paddingVertical: 12, backgroundColor: color.paper, borderTopWidth: 1, borderColor: color.line },
+  navButton: { width: 64, height: 56, justifyContent: 'center', alignItems: 'center' },
+  orderHeader: { minHeight: 68, paddingHorizontal: 20, paddingVertical: 8, borderBottomWidth: 1, borderColor: color.line, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  receiptSection: { minHeight: 0, borderBottomWidth: 2, borderColor: color.line },
+  receiptBody: { padding: 20, paddingBottom: 12 },
+  receiptItem: { paddingVertical: 12, paddingHorizontal: 12, marginHorizontal: -12, borderLeftWidth: 3, borderColor: 'transparent', gap: 4, minHeight: 64 },
+  selectedReceiptItem: { backgroundColor: color.bg, borderColor: color.active },
+  receiptTotal: { paddingHorizontal: 20, paddingVertical: 14, borderTopWidth: 1, borderColor: color.line, gap: 4 },
+  orderControls: { minHeight: 0, backgroundColor: '#fafafa' },
+  orderForm: { padding: 20, paddingBottom: 8, gap: 4 },
+  orderFooter: { paddingHorizontal: 16, paddingVertical: 12, borderTopWidth: 1, borderColor: color.line, backgroundColor: color.paper, gap: 10 },
+  overlay: { flex: 1, backgroundColor: '#00000066', alignItems: 'center', justifyContent: 'center', padding: 16 },
+  dialog: { width: '100%', maxWidth: 640, maxHeight: '94%', backgroundColor: color.paper, borderWidth: 1, borderColor: color.line },
+  dialogHeader: { padding: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: 1, borderColor: color.line },
+  dialogBody: { padding: 20, gap: 8 }, dialogFooter: { padding: 20, borderTopWidth: 1, borderColor: color.line, flexDirection: 'row', justifyContent: 'flex-end', gap: 12, flexWrap: 'wrap' },
+  empty: { paddingVertical: 48, alignItems: 'center', gap: 18 }, error: { color: color.red, backgroundColor: '#fef3f2', padding: 12 },
+  card: { backgroundColor: color.paper, borderWidth: 1, borderColor: color.line, padding: 20, gap: 8, minHeight: 190 },
+  listRow: { paddingVertical: 16, borderBottomWidth: 1, borderColor: color.line, gap: 10 }, badge: { fontSize: 12, lineHeight: 18, backgroundColor: '#eee', paddingHorizontal: 8, paddingVertical: 3 },
+  toast: { position: 'absolute', bottom: 90, left: 16, right: 16, backgroundColor: color.active, padding: 16, zIndex: 100 },
+});

@@ -1,0 +1,8 @@
+{
+  "cli": { "version": ">= 27.0.0", "appVersionSource": "local" },
+  "build": {
+    "development": { "distribution": "internal", "environment": "development", "channel": "development", "env": { "APP_ENV": "development" }, "credentialsSource": "local", "android": { "buildType": "apk" } },
+    "development-client": { "extends": "development", "developmentClient": true },
+    "production": { "distribution": "internal", "environment": "production", "channel": "production", "env": { "APP_ENV": "production" }, "credentialsSource": "local", "android": { "buildType": "apk" } }
+  }
+}

@@ -19,10 +19,6 @@ Open http://localhost:5180 on the same computer. Keep the terminal running. Use 
 
 The browser preview supports POS flows and local records. Native Bluetooth printing requires an Android APK with the included native module; it does not work in the browser or stock Expo Go. Each device/browser has its own local data.
 
-## Working as a group
-
-The owner can invite members at [repository collaborators](https://github.com/Seperoth/POS-SYSTEM-ISFINALS/settings/access). Each member accepts the invitation using their own GitHub account.
-
 ```powershell
 git switch main
 git pull --ff-only
@@ -34,15 +30,6 @@ git add .
 git commit -m "Describe your change"
 git push -u origin codex/your-change
 ```
-
-Open a pull request into main for your teammates to review. Group pushes run tests and a web build only. They do not deploy the app.
-
-## Independent Android setup
-
-- App identities: `com.seperoth.possystemisfinals` and `com.seperoth.possystemisfinals.dev`. They can coexist with the client app and use separate native storage.
-- Expo owner/project linkage and update URL are removed. OTA updates are disabled, and manual update commands deliberately stop. No client Expo token, signing key or business records were copied.
-- For cloud APK builds or your own updates, create a separate Expo project/account setup and new signing credentials. Configure your own project ID, update channels and runtime versions before enabling OTA. See [ANDROID.md](ANDROID.md).
-- Do not install the original client's APK to test this project: it runs the client app and receives that app's updates.
 
 ## Source baseline
 

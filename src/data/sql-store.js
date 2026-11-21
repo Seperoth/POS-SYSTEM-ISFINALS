@@ -1,4 +1,5 @@
 import { blankState, validateState } from '../domain/model.js';
+import { withRestaurantCatalog } from '../domain/menu.js';
 const tables = { products: 'products', ingredients: 'ingredients', recipes: 'recipes', suppliers: 'suppliers', sales: 'sales', movements: 'movements', printJobs: 'print_jobs', held: 'held_orders' };
 export async function openSqlStore(driver) {
   await driver.exec(`PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;
@@ -10,7 +11,7 @@ export async function openSqlStore(driver) {
   let previous = null;
   const store = {
     async load() {
-      const state = blankState();
+      let state = blankState();
       const meta = await driver.all('SELECT payload FROM meta WHERE key = ?', ['state']);
       if (meta.length) Object.assign(state, JSON.parse(meta[0].payload));
       for (const [key, table] of Object.entries(tables)) state[key] = (await driver.all(`SELECT payload FROM ${table}`)).map(row => JSON.parse(row.payload));
@@ -19,6 +20,10 @@ export async function openSqlStore(driver) {
       state.sales.forEach(s => { if (receipts.has(s.id)) s.receipt = receipts.get(s.id); });
       validateState(state);
       previous = JSON.parse(JSON.stringify(state));
+      if (!meta.length && !state.products.length && !state.sales.length) {
+        state = withRestaurantCatalog(state);
+        await store.save(state);
+      }
       return state;
     },
     async save(state, recovery = false) {

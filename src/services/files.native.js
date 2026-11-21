@@ -14,13 +14,17 @@ export async function shareFile(name, text, mime = 'application/json') {
   if (!(await Sharing.isAvailableAsync())) throw new Error('Sharing is unavailable on this device. Use Save to files.');
   await Sharing.shareAsync(uri, { mimeType: mime, dialogTitle: name });
 }
-export async function importBackup() {
-  const result = await DocumentPicker.getDocumentAsync({ type: ['application/json', 'text/plain', 'application/octet-stream'], copyToCacheDirectory: true });
+async function importText(type, maxSize, errorMessage) {
+  const result = await DocumentPicker.getDocumentAsync({ type, copyToCacheDirectory: true });
   if (result.canceled) return null;
   const file = result.assets[0];
-  if (file.size > 50 * 1024 * 1024) throw new Error('Backup exceeds 50 MB.');
-  return FileSystem.readAsStringAsync(file.uri);
+  if (file.size > maxSize) throw new Error(errorMessage);
+  const contents = await FileSystem.readAsStringAsync(file.uri);
+  if (contents.length > maxSize) throw new Error(errorMessage);
+  return contents;
 }
+export const importBackup = () => importText(['application/json', 'text/plain', 'application/octet-stream'], 50 * 1024 * 1024, 'Backup exceeds 50 MB.');
+export const importForecast = () => importText(['text/csv', 'text/comma-separated-values', 'text/plain', 'application/vnd.ms-excel', 'application/octet-stream'], 1024 * 1024, 'Forecast CSV exceeds 1 MB.');
 export async function pickApk() {
   const result = await DocumentPicker.getDocumentAsync({ type: 'application/vnd.android.package-archive', copyToCacheDirectory: true });
   return result.canceled ? null : result.assets[0].uri;

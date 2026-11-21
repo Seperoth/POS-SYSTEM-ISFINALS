@@ -13,3 +13,9 @@ artifacts/
 *.keystore
 *.jks
 credentials.json
+forecasting/Restaurant Forecast/data/
+forecasting/Restaurant Forecast/.*
+forecasting/Restaurant Forecast/*/*
+!forecasting/Restaurant Forecast/*/settings.xml
+forecasting/*.knwf
+__pycache__/

@@ -5,11 +5,11 @@ import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import * as Crypto from 'expo-crypto';
 import { SvgXml } from 'react-native-svg';
-import { Plus, Search, Pencil, X, ChartNoAxesCombined, Settings, CircleHelp, Printer, Download, ShoppingBag } from 'lucide-react-native';
+import { Plus, Search, Pencil, X, ChartNoAxesCombined, TrendingUp, Settings, CircleHelp, Printer, Download, ShoppingBag } from 'lucide-react-native';
 import { openStore } from './data/store';
 import { createController } from './data/controller.js';
 import { addMenuItem, missingChoices, totals, money } from './domain/model.js';
-import { menuCategory } from './domain/menu.js';
+import { menuCategory, withRestaurantCatalog } from './domain/menu.js';
 import { cancelHeldOrder, resumeHeldOrder } from './domain/held-orders.js';
 import { createBackup, readBackup, salesCsv } from './domain/backup.js';
 import { salesForPeriod, salesSummary } from './domain/sales-report.js';
@@ -25,11 +25,19 @@ import { navIcons } from './ui/nav-icons';
 import { s, color, categoryColors } from './ui/theme';
 import { CategoryChoices } from './ui/categories';
 import OrderPanel from './ui/OrderPanel';
+import ForecastScreen from './ui/ForecastScreen';
 
 const hash = text => Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, text);
 const dateLabel = value => new Date(value).toLocaleString('en-PH', { dateStyle: 'medium', timeStyle: 'short' });
-const filename = suffix => `universal-pos-${new Date().toISOString().slice(0, 10)}.${suffix}`;
-const nav = ['Point of sale', 'Orders', 'Sales & reports', 'Settings', 'Help'];
+const filename = suffix => `restaurant-pos-${new Date().toISOString().slice(0, 10)}.${suffix}`;
+const nav = [
+  ['Point of sale', 'POS'],
+  ['Orders', 'Orders'],
+  ['Sales & reports', 'Reports', ChartNoAxesCombined],
+  ['Forecast', 'Forecast', TrendingUp],
+  ['Settings', 'Settings', Settings],
+  ['Help', 'Help', CircleHelp],
+];
 let controllerPromise;
 function boot() { return controllerPromise ||= openStore().then(createController).catch(e => { controllerPromise = null; throw e; }); }
 export default function App() {
@@ -94,21 +102,26 @@ function Workspace({ controller }) {
     <View style={{ flex: 1, flexDirection: 'row' }}>
       <View style={{ flex: 1, minWidth: 0 }}>
         <View style={{ flex: 1 }} accessibilityElementsHidden={!wide && orderOpen && tab === 0} importantForAccessibility={!wide && orderOpen && tab === 0 ? 'no-hide-descendants' : 'auto'}>
-        <View style={s.header}><T style={[s.bold, { textAlign: 'center' }]}>{Constants.expoConfig?.extra?.appEnvironment === 'development' ? 'Development · test data only' : 'Main branch'}</T></View>
+        <View style={s.header}>
+          <T style={[s.bold, { textAlign: 'center' }]}>Restaurant POS</T>
+          {Constants.expoConfig?.extra?.appEnvironment === 'development' && <T style={[s.small, s.muted, { textAlign: 'center' }]}>Development · test data only</T>}
+        </View>
         <View style={{ flex: 1 }}>
           {tab === 0 && <MenuScreen {...props} onAdd={addProduct} />}
           {tab === 1 && <OrdersScreen {...props} openReceipt={openReceipt} />}
           {tab === 2 && <ReportsScreen {...props} openReceipt={openReceipt} />}
-          {tab === 3 && <SettingsScreen {...props} backup={backup} importBackup={importBackup} checkUpdates={checkUpdates} update={update} updating={updating} onRestart={() => setModal({ type: 'restart' })} />}
-          {tab === 4 && <HelpScreen />}
+          {tab === 3 && <ForecastScreen {...props} />}
+          {tab === 4 && <SettingsScreen {...props} backup={backup} importBackup={importBackup} checkUpdates={checkUpdates} update={update} updating={updating} onRestart={() => setModal({ type: 'restart' })} />}
+          {tab === 5 && <HelpScreen />}
         </View>
         {!wide && tab === 0 && <Button primary icon={ShoppingBag} style={{ margin: 12 }} onPress={() => setOrderOpen(true)}>View order · {cartCount} {cartCount === 1 ? 'item' : 'items'} · {money(totals(state.draft).total / 100)}</Button>}
         </View>
-        <View style={[s.nav, { paddingBottom: 12 + insets.bottom }]}>{nav.map((label, index) => {
-          const selected = tab === index, tint = selected ? '#fff' : '#646669', Icon = [null, null, ChartNoAxesCombined, Settings, CircleHelp][index];
+        <View style={[s.nav, { paddingBottom: 12 + insets.bottom }]}>{nav.map(([label, title, Icon], index) => {
+          const selected = tab === index, tint = selected ? '#fff' : '#646669';
           return <Pressable key={label} accessibilityRole="tab" accessibilityLabel={label} accessibilityState={{ selected }} onPress={() => { setTab(index); setOrderOpen(false); }}
             style={({ pressed }) => [s.navButton, { maxWidth: `${100 / nav.length}%` }, selected && { backgroundColor: color.active }, pressed && { opacity: 0.6 }]}>
             {index < 2 ? <SvgXml xml={navIcons[index].replace(/ data-name="[^"]*"/g, '')} width={23} height={23} fill={tint} /> : <Icon size={24} color={tint} strokeWidth={1.7} />}
+            <T style={{ color: tint, fontSize: 11, lineHeight: 15 }}>{title}</T>
           </Pressable>;
         })}</View>
       </View>
@@ -117,6 +130,9 @@ function Workspace({ controller }) {
     {!wide && orderOpen && tab === 0 && <View style={{ position: 'absolute', top: insets.top, left: insets.left, right: insets.right, bottom: 80 + insets.bottom, backgroundColor: '#fff' }}>{order}</View>}
     {message ? <Pressable onPress={() => setMessage('')} style={[s.toast, { bottom: (!wide && tab === 0 && !orderOpen ? 150 : 84) + insets.bottom, ...(wide && tab === 0 ? { right: (orderWidth) + 16 } : {}) }]}><T accessibilityRole="alert" style={s.white}>{message}</T></Pressable> : null}
     {modal?.type === 'product' && <ProductEditor {...props} product={modal.product} />}
+    {modal?.type === 'load-catalog' && <Dialog title="Load restaurant catalog" onClose={close} saveLabel="Add dishes" onSave={async () => {
+      await controller.mutate(withRestaurantCatalog); close(); notify('Restaurant catalog loaded.');
+    }}><T>Add the workbook dishes that have not already been added to this device.</T></Dialog>}
     {modal?.type === 'payment' && <Payment {...props} onDone={sale => { setOrderOpen(false); openReceipt(sale); drain().catch(e => notify(e.message)); }} />}
     {modal?.type === 'receipt' && <Receipt {...props} sale={state.sales.find(s => s.id === modal.saleId)} />}
     {modal?.type === 'sales-summary' && <SalesSummary {...props} report={modal.report} />}
@@ -141,7 +157,8 @@ function MenuScreen({ state, modal, onAdd }) {
   return <ScrollView keyboardShouldPersistTaps="handled" onLayout={event => setMenuWidth(event.nativeEvent.layout.width)} contentContainerStyle={[s.page, width < 600 && { padding: 16 }]}>
     <View style={[s.row, { justifyContent: 'space-between', flexWrap: 'wrap' }]}><T style={s.title}>Menu</T><View style={s.row}>{catalog.length > 0 && <Button onPress={() => setManage(!manage)}>{manage ? 'Done' : 'Manage menu'}</Button>}<Button icon={Plus} onPress={() => modal({ type: 'product' })}>Add item</Button></View></View>
     {catalog.length > 0 && <><View style={[s.field, s.row]}><Search size={20} color={color.muted} /><TextInput accessibilityLabel="Search menu" placeholder="Search menu" placeholderTextColor={color.muted} value={search} onChangeText={setSearch} style={[s.text, { flex: 1, minHeight: 24, outlineWidth: 0 }]} /></View>
-      <CategoryChoices value={category} onChange={setCategory} includeAll /></>}
+      <CategoryChoices value={category} onChange={setCategory} allLabel="All menu" /></>}
+    {(manage || !catalog.length) && <Button onPress={() => modal({ type: 'load-catalog' })}>Load workbook catalog</Button>}
     {!products.length ? <Empty title={catalog.length ? 'No matching items' : 'Your menu is empty'} action={catalog.length ? undefined : 'Add menu item'} onPress={() => modal({ type: 'product' })} />
       : <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16 }}>{products.map(p => {
         const category = menuCategory(p.category), tone = categoryColors[category], ink = tone ? '#fff' : color.ink;

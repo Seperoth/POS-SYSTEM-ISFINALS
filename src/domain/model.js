@@ -1,3 +1,5 @@
+import { validateForecastRows } from './forecast.js';
+
 export const SCHEMA = 1;
 export const APP_ID = 'com.seperoth.possystemisfinals';
 export const uid = (prefix = 'id') => `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
@@ -124,6 +126,12 @@ export function checkout(state, payment, { now = new Date().toISOString(), saleI
 }
 export function validateState(state) {
   if (!state || state.schemaVersion !== SCHEMA) throw new Error('This backup version is not supported.');
+  if (state.forecast !== undefined) {
+    validateForecastRows(state.forecast?.rows);
+    if (typeof state.forecast.importedAt !== 'string' || !Number.isFinite(Date.parse(state.forecast.importedAt))) {
+      throw new Error('Invalid forecast import date.');
+    }
+  }
   for (const key of ['products', 'ingredients', 'recipes', 'suppliers', 'sales', 'movements', 'printJobs', 'held']) {
     if (!Array.isArray(state[key])) throw new Error(`Invalid backup: ${key}.`);
     const ids = new Set();

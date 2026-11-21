@@ -4,8 +4,8 @@ import { MENU_CATEGORIES } from '../domain/menu.js';
 import { T } from './components';
 import { s, color, categoryColors } from './theme';
 
-export function CategoryChoices({ value, onChange, includeAll = false }) {
-  const options = includeAll ? ['All menu', ...MENU_CATEGORIES] : MENU_CATEGORIES;
+export function CategoryChoices({ value, onChange, allLabel }) {
+  const options = allLabel ? [allLabel, ...MENU_CATEGORIES] : MENU_CATEGORIES;
   return <View style={s.wrap}>{options.map(category => {
     const selected = value === category, tone = categoryColors[category];
     return <Pressable key={category} accessibilityRole="button" accessibilityLabel={category} accessibilityState={{ selected }} onPress={() => onChange(category)}

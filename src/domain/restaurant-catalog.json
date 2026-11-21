@@ -1,0 +1,422 @@
+[
+  {
+    "id": "APP-001",
+    "category": "Appetizer",
+    "name": "Crispy Calamari",
+    "ingredient": "Seafood",
+    "price": 240.0
+  },
+  {
+    "id": "APP-002",
+    "category": "Appetizer",
+    "name": "Pork Lumpia Shanghai",
+    "ingredient": "Pork",
+    "price": 160.0
+  },
+  {
+    "id": "APP-003",
+    "category": "Appetizer",
+    "name": "Gambas al Ajillo",
+    "ingredient": "Seafood",
+    "price": 320.0
+  },
+  {
+    "id": "APP-004",
+    "category": "Appetizer",
+    "name": "Buffalo Chicken Wings",
+    "ingredient": "Poultry",
+    "price": 280.0
+  },
+  {
+    "id": "APP-005",
+    "category": "Appetizer",
+    "name": "Loaded Cheesy Nachos",
+    "ingredient": "Dairy",
+    "price": 220.0
+  },
+  {
+    "id": "APP-006",
+    "category": "Appetizer",
+    "name": "Vegetable Spring Rolls",
+    "ingredient": "Vegetable",
+    "price": 130.0
+  },
+  {
+    "id": "APP-007",
+    "category": "Appetizer",
+    "name": "Tokwa't Baboy",
+    "ingredient": "Pork",
+    "price": 175.0
+  },
+  {
+    "id": "APP-008",
+    "category": "Appetizer",
+    "name": "Chicken Quesadilla",
+    "ingredient": "Poultry",
+    "price": 210.0
+  },
+  {
+    "id": "APP-009",
+    "category": "Appetizer",
+    "name": "Mozzarella Cheese Sticks",
+    "ingredient": "Dairy",
+    "price": 190.0
+  },
+  {
+    "id": "APP-010",
+    "category": "Appetizer",
+    "name": "Kinilaw na Tanigue",
+    "ingredient": "Seafood",
+    "price": 290.0
+  },
+  {
+    "id": "APP-011",
+    "category": "Appetizer",
+    "name": "Garlic Parmesan Fries",
+    "ingredient": "Vegetable",
+    "price": 140.0
+  },
+  {
+    "id": "APP-012",
+    "category": "Appetizer",
+    "name": "Beef Salpicao",
+    "ingredient": "Beef",
+    "price": 350.0
+  },
+  {
+    "id": "APP-013",
+    "category": "Appetizer",
+    "name": "Dynamite Lumpia",
+    "ingredient": "Pork",
+    "price": 150.0
+  },
+  {
+    "id": "APP-014",
+    "category": "Appetizer",
+    "name": "Crispy Kangkong",
+    "ingredient": "Vegetable",
+    "price": 110.0
+  },
+  {
+    "id": "APP-015",
+    "category": "Appetizer",
+    "name": "Sisig Tacos",
+    "ingredient": "Pork",
+    "price": 230.0
+  },
+  {
+    "id": "ENT-001",
+    "category": "Entree",
+    "name": "Crispy Pata",
+    "ingredient": "Pork",
+    "price": 580.0
+  },
+  {
+    "id": "ENT-002",
+    "category": "Entree",
+    "name": "Beef Kare-Kare",
+    "ingredient": "Beef",
+    "price": 450.0
+  },
+  {
+    "id": "ENT-003",
+    "category": "Entree",
+    "name": "Pork Belly Sisig Platter",
+    "ingredient": "Pork",
+    "price": 280.0
+  },
+  {
+    "id": "ENT-004",
+    "category": "Entree",
+    "name": "Chicken Inasal Leg Quarter",
+    "ingredient": "Poultry",
+    "price": 240.0
+  },
+  {
+    "id": "ENT-005",
+    "category": "Entree",
+    "name": "Sinigang na Salmon Head & Belly",
+    "ingredient": "Seafood",
+    "price": 380.0
+  },
+  {
+    "id": "ENT-006",
+    "category": "Entree",
+    "name": "Beef Caldereta",
+    "ingredient": "Beef",
+    "price": 420.0
+  },
+  {
+    "id": "ENT-007",
+    "category": "Entree",
+    "name": "Lechon Kawali",
+    "ingredient": "Pork",
+    "price": 320.0
+  },
+  {
+    "id": "ENT-008",
+    "category": "Entree",
+    "name": "Grilled Tuna Belly",
+    "ingredient": "Seafood",
+    "price": 460.0
+  },
+  {
+    "id": "ENT-009",
+    "category": "Entree",
+    "name": "Chicken Adobo Confit",
+    "ingredient": "Poultry",
+    "price": 260.0
+  },
+  {
+    "id": "ENT-010",
+    "category": "Entree",
+    "name": "Sizzling Bulalo Steak",
+    "ingredient": "Beef",
+    "price": 520.0
+  },
+  {
+    "id": "ENT-011",
+    "category": "Entree",
+    "name": "Seafood Paella Valenciana",
+    "ingredient": "Seafood",
+    "price": 560.0
+  },
+  {
+    "id": "ENT-012",
+    "category": "Entree",
+    "name": "Bicol Express",
+    "ingredient": "Pork",
+    "price": 290.0
+  },
+  {
+    "id": "ENT-013",
+    "category": "Entree",
+    "name": "Pan-Seared Salmon Fillet",
+    "ingredient": "Seafood",
+    "price": 590.0
+  },
+  {
+    "id": "ENT-014",
+    "category": "Entree",
+    "name": "Grilled Ribeye Steak",
+    "ingredient": "Beef",
+    "price": 600.0
+  },
+  {
+    "id": "ENT-015",
+    "category": "Entree",
+    "name": "Sweet and Sour Pork",
+    "ingredient": "Pork",
+    "price": 270.0
+  },
+  {
+    "id": "DRK-001",
+    "category": "Drinks",
+    "name": "Calamansi Iced Tea",
+    "ingredient": "Tea",
+    "price": 85.0
+  },
+  {
+    "id": "DRK-002",
+    "category": "Drinks",
+    "name": "Fresh Young Coconut (Buko)",
+    "ingredient": "Fruit",
+    "price": 95.0
+  },
+  {
+    "id": "DRK-003",
+    "category": "Drinks",
+    "name": "Fresh Mango Shake",
+    "ingredient": "Fruit",
+    "price": 120.0
+  },
+  {
+    "id": "DRK-004",
+    "category": "Drinks",
+    "name": "Watermelon Basil Cooler",
+    "ingredient": "Fruit",
+    "price": 130.0
+  },
+  {
+    "id": "DRK-005",
+    "category": "Drinks",
+    "name": "San Miguel Pale Pilsen",
+    "ingredient": "Alcohol",
+    "price": 110.0
+  },
+  {
+    "id": "DRK-006",
+    "category": "Drinks",
+    "name": "San Miguel Light",
+    "ingredient": "Alcohol",
+    "price": 110.0
+  },
+  {
+    "id": "DRK-007",
+    "category": "Drinks",
+    "name": "Iced Cafe Latte",
+    "ingredient": "Coffee",
+    "price": 140.0
+  },
+  {
+    "id": "DRK-008",
+    "category": "Drinks",
+    "name": "Iced Spanish Latte",
+    "ingredient": "Coffee",
+    "price": 155.0
+  },
+  {
+    "id": "DRK-009",
+    "category": "Drinks",
+    "name": "Cucumber Lemonade Pitcher",
+    "ingredient": "Fruit",
+    "price": 180.0
+  },
+  {
+    "id": "DRK-010",
+    "category": "Drinks",
+    "name": "Four Seasons Juice",
+    "ingredient": "Fruit",
+    "price": 95.0
+  },
+  {
+    "id": "DRK-011",
+    "category": "Drinks",
+    "name": "Pineapple Mint Fizz",
+    "ingredient": "Fruit",
+    "price": 125.0
+  },
+  {
+    "id": "DRK-012",
+    "category": "Drinks",
+    "name": "Brewed Barako Coffee",
+    "ingredient": "Coffee",
+    "price": 90.0
+  },
+  {
+    "id": "DRK-013",
+    "category": "Drinks",
+    "name": "Hot Matcha Latte",
+    "ingredient": "Tea",
+    "price": 150.0
+  },
+  {
+    "id": "DRK-014",
+    "category": "Drinks",
+    "name": "Strawberry Soda Float",
+    "ingredient": "Fruit",
+    "price": 135.0
+  },
+  {
+    "id": "DRK-015",
+    "category": "Drinks",
+    "name": "Bottled Mineral Water",
+    "ingredient": "Water",
+    "price": 50.0
+  },
+  {
+    "id": "DES-001",
+    "category": "Dessert",
+    "name": "Leche Flan",
+    "ingredient": "Dairy",
+    "price": 120.0
+  },
+  {
+    "id": "DES-002",
+    "category": "Dessert",
+    "name": "Halo-Halo Special",
+    "ingredient": "Fruit",
+    "price": 165.0
+  },
+  {
+    "id": "DES-003",
+    "category": "Dessert",
+    "name": "Turon with Langka & Ice Cream",
+    "ingredient": "Fruit",
+    "price": 130.0
+  },
+  {
+    "id": "DES-004",
+    "category": "Dessert",
+    "name": "Ube Halaya Cheesecake",
+    "ingredient": "Dairy",
+    "price": 185.0
+  },
+  {
+    "id": "DES-005",
+    "category": "Dessert",
+    "name": "Buko Pandan Salad",
+    "ingredient": "Fruit",
+    "price": 115.0
+  },
+  {
+    "id": "DES-006",
+    "category": "Dessert",
+    "name": "Mais Con Yelo",
+    "ingredient": "Fruit",
+    "price": 110.0
+  },
+  {
+    "id": "DES-007",
+    "category": "Dessert",
+    "name": "Mango Float Cup",
+    "ingredient": "Fruit",
+    "price": 140.0
+  },
+  {
+    "id": "DES-008",
+    "category": "Dessert",
+    "name": "Sizzling Brownie Ala Mode",
+    "ingredient": "Dairy",
+    "price": 175.0
+  },
+  {
+    "id": "DES-009",
+    "category": "Dessert",
+    "name": "Bibingka Galapong",
+    "ingredient": "Rice",
+    "price": 135.0
+  },
+  {
+    "id": "DES-010",
+    "category": "Dessert",
+    "name": "Cassava Cake",
+    "ingredient": "Vegetable",
+    "price": 105.0
+  },
+  {
+    "id": "SID-001",
+    "category": "Sides",
+    "name": "Steamed Jasmine Rice",
+    "ingredient": "Rice",
+    "price": 45.0
+  },
+  {
+    "id": "SID-002",
+    "category": "Sides",
+    "name": "Garlic Fried Rice Platter",
+    "ingredient": "Rice",
+    "price": 140.0
+  },
+  {
+    "id": "SID-003",
+    "category": "Sides",
+    "name": "Atchara (Pickled Papaya)",
+    "ingredient": "Vegetable",
+    "price": 55.0
+  },
+  {
+    "id": "SID-004",
+    "category": "Sides",
+    "name": "Ensaladang Talong",
+    "ingredient": "Vegetable",
+    "price": 95.0
+  },
+  {
+    "id": "SID-005",
+    "category": "Sides",
+    "name": "Plain Ensaimada",
+    "ingredient": "Bakery",
+    "price": 75.0
+  }
+]

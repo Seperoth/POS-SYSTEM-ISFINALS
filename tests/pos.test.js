@@ -33,8 +33,17 @@ async function database(seed = null, fail = () => false) {
   const store = await openSqlStore(driver); await store.load(); if (seed) await store.save(seed);
   return { db, store };
 }
-test('a new installation has no sample catalog, inventory, recipes, or sales', () => {
-  const s = blankState(); for (const key of ['products', 'ingredients', 'recipes', 'sales', 'suppliers', 'movements', 'held']) assert.deepEqual(s[key], []);
+test('a new restaurant installation has the workbook catalog and no recorded sales', async () => {
+  const { db, store } = await database();
+  const state = await store.load();
+  assert.equal(state.products.length, 60);
+  assert.deepEqual(new Set(state.products.map(p => p.category)), new Set(MENU_CATEGORIES));
+  assert.deepEqual(state.sales, []);
+  const first = state.products[0];
+  await store.save(removeMenuItem(state, first.id));
+  assert.ok((await store.load()).products.find(p => p.id === first.id).deletedAt);
+  assert.equal(db.prepare('SELECT COUNT(*) AS count FROM products').get().count, 60);
+  db.close();
 });
 test('POS checkout ignores archived inventory and freezes customer, items and total', () => {
   const original = fixture(), { state, sale } = checkout(original, { method: 'Cash', received: 250 });
@@ -307,10 +316,10 @@ test('inline choices use current persisted selections so rapid extra taps cannot
 
 test('menu saves require a designated category while legacy backups remain readable', async () => {
   const original = fixture(), product = clone(original.products[0]);
-  for (const category of ['', 'Test', 'Coffee', 'food']) assert.throws(() => saveMenuItem(original, { ...product, category }), /Choose FOOD/);
+  for (const category of ['', 'Test', 'Coffee', 'food']) assert.throws(() => saveMenuItem(original, { ...product, category }), /Choose a restaurant category/);
   for (const category of MENU_CATEGORIES) assert.equal(saveMenuItem(original, { ...product, category }).products[0].category, category);
-  assert.equal(menuCategory('  rice   meals '), 'FOOD'); assert.equal(menuCategory('Coffee'), 'DRINKS');
-  assert.equal(menuCategory('Confectionery'), 'CONFECTIONERY'); assert.equal(menuCategory(' extra '), 'EXTRAS'); assert.equal(menuCategory('My custom category'), null);
+  assert.equal(menuCategory('  rice   meals '), 'Entree'); assert.equal(menuCategory('Coffee'), 'Drinks');
+  assert.equal(menuCategory('Confectionery'), 'Dessert'); assert.equal(menuCategory(' extra '), 'Sides'); assert.equal(menuCategory('My custom category'), null);
   assert.equal(original.products[0].category, 'Test');
   const backup = await readBackup(await createBackup(original, hash), hash);
   assert.equal(backup.payload.products[0].category, 'Test');
@@ -342,13 +351,13 @@ test('menu removal protects current and held orders and cannot restore an alread
   assert.throws(() => removeMenuItem(state, 'p'), /current and held orders/);
   state.held = []; const removed = removeMenuItem(state, 'p');
   assert.throws(() => removeMenuItem(removed, 'p'), /already been removed/);
-  assert.throws(() => saveMenuItem(removed, { ...state.products[0], category: 'DRINKS' }), /has been removed/);
+  assert.throws(() => saveMenuItem(removed, { ...state.products[0], category: 'Drinks' }), /has been removed/);
 });
 
 test('serialized SQLite edits cannot resurrect an item removed while its editor was open', async () => {
   const seed = fixture(); seed.draft = blankState().draft;
   const { db, store } = await database(seed), controller = await createController(store);
-  const stale = { ...clone(seed.products[0]), name: 'Stale edit', category: 'DRINKS' };
+  const stale = { ...clone(seed.products[0]), name: 'Stale edit', category: 'Drinks' };
   const results = await Promise.allSettled([
     controller.mutate(state => removeMenuItem(state, 'p')),
     controller.mutate(state => saveMenuItem(state, stale)),

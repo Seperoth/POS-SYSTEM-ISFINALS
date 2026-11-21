@@ -1,4 +1,5 @@
 import { blankState, clone, validateState } from '../domain/model.js';
+import { withRestaurantCatalog } from '../domain/menu.js';
 import Constants from 'expo-constants';
 export async function openStore() {
   // The previous prototype's sample menu is intentionally not migrated.
@@ -15,10 +16,10 @@ export async function openStore() {
     request.onsuccess = () => resolve(request.result || null); request.onerror = () => reject(request.error);
   });
   return {
-    async load() { return validateState(await read('state') || blankState()); },
+    async load() { return validateState(await read('state') || withRestaurantCatalog(blankState())); },
     async save(state, recovery = false) {
       validateState(state);
-      const old = recovery ? await read('state') || blankState() : null;
+      const old = recovery ? await read('state') || withRestaurantCatalog(blankState()) : null;
       await new Promise((resolve, reject) => {
         const tx = db.transaction('records', 'readwrite'), records = tx.objectStore('records');
         if (old) records.put(old, 'recovery');

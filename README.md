@@ -1,6 +1,6 @@
-# POS-SYSTEM-ISFINALS
+# Restaurant POS with Sales Forecasting
 
-Independent group project based on **Universal POS 2.4.1**. The POS features are copied from the current working release: offline sales and saved receipts, a client-managed menu, FOOD/DRINKS/CONFECTIONERY/EXTRAS colors, direct menu ordering, immediate held-order cancellation, sales reports, Bluetooth receipt printing, export, backup and restore. New installations start with an empty menu and no sales.
+Restaurant POS for the Information Systems final project. A new installation opens with the 60-dish workbook menu and an empty sales history. The catalog uses the workbook's Appetizer, Entree, Drinks, Dessert and Sides categories. Open **Forecast** for daily and weekly dish projections from the KNIME Random Forest model. Use **Import KNIME CSV** to load a new run on the device.
 
 This is a standalone repository, not a fork or an automatically synchronized mirror. Your group can alter its content without changing the client's Universal POS. The original task will leave this repository alone unless Jojo explicitly requests changes.
 
@@ -19,13 +19,14 @@ Open http://localhost:5180 on the same computer. Keep the terminal running. Use 
 
 The browser preview supports POS flows and local records. Native Bluetooth printing requires an Android APK with the included native module; it does not work in the browser or stock Expo Go. Each device/browser has its own local data.
 
+See the [forecasting guide](forecasting/README.md) for the KNIME workflow, workbook export, data dictionary, model evaluation and architecture. On a device that already has POS data, use **Manage menu → Load workbook catalog** to add workbook dishes missing from that device.
+
 ## Working as a group
 
 The owner can invite members at [repository collaborators](https://github.com/Seperoth/POS-SYSTEM-ISFINALS/settings/access). Each member accepts the invitation using their own GitHub account.
 
 ```powershell
-git switch main
-git pull --ff-only
+git switch develop
 git switch -c codex/your-change
 # Edit the project, then verify it:
 npm test
@@ -35,7 +36,7 @@ git commit -m "Describe your change"
 git push -u origin codex/your-change
 ```
 
-Open a pull request into main for your teammates to review. Group pushes run tests and a web build only. They do not deploy the app.
+Open a pull request into the group's target branch for review. Group pushes run tests and a web build.
 
 ## Independent Android setup
 

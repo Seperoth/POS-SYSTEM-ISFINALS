@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 export const color = { ink: '#202124', muted: '#6b6d70', line: '#dedfe1', bg: '#f4f4f4', paper: '#ffffff', active: '#3c3d3e', green: '#15803d', red: '#b42318' };
 export const categoryColors = {
-  FOOD: { solid: '#b42318', tint: '#fff1f0' },
-  DRINKS: { solid: '#1d4ed8', tint: '#eff6ff' },
-  CONFECTIONERY: { solid: '#166534', tint: '#f0fdf4' },
-  EXTRAS: { solid: '#7e22ce', tint: '#faf5ff' },
+  Appetizer: { solid: '#9a3412', tint: '#fff7ed' },
+  Entree: { solid: '#b42318', tint: '#fff1f0' },
+  Drinks: { solid: '#1d4ed8', tint: '#eff6ff' },
+  Dessert: { solid: '#7e22ce', tint: '#faf5ff' },
+  Sides: { solid: '#166534', tint: '#f0fdf4' },
 };
 export const s = StyleSheet.create({
   app: { flex: 1, backgroundColor: color.bg }, row: { flexDirection: 'row', alignItems: 'center', gap: 12 }, wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
@@ -16,8 +17,8 @@ export const s = StyleSheet.create({
   label: { fontFamily: 'RobotoMedium', fontSize: 14, color: color.ink, marginBottom: 6 }, fieldGroup: { gap: 0, marginBottom: 16 },
   panel: { backgroundColor: color.paper, borderWidth: 1, borderColor: color.line, padding: 20 }, divider: { height: 1, backgroundColor: color.line, marginVertical: 16 },
   page: { padding: 24, gap: 20, paddingBottom: 32 }, header: { minHeight: 72, borderBottomWidth: 1, borderColor: color.line, backgroundColor: color.paper, paddingHorizontal: 24, justifyContent: 'center', gap: 4 },
-  nav: { minHeight: 80, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', paddingHorizontal: 12, paddingVertical: 12, backgroundColor: color.paper, borderTopWidth: 1, borderColor: color.line },
-  navButton: { width: 64, height: 56, justifyContent: 'center', alignItems: 'center' },
+  nav: { minHeight: 80, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', paddingHorizontal: 8, paddingVertical: 12, backgroundColor: color.paper, borderTopWidth: 1, borderColor: color.line },
+  navButton: { width: 64, height: 56, gap: 3, justifyContent: 'center', alignItems: 'center' },
   orderHeader: { minHeight: 68, paddingHorizontal: 20, paddingVertical: 8, borderBottomWidth: 1, borderColor: color.line, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   receiptSection: { minHeight: 0, borderBottomWidth: 2, borderColor: color.line },
   receiptBody: { padding: 20, paddingBottom: 12 },

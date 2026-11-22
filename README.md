@@ -21,12 +21,9 @@ The browser preview supports POS flows and local records. Native Bluetooth print
 
 See the [forecasting guide](forecasting/README.md) for the KNIME workflow, workbook export, data dictionary, model evaluation and architecture. On a device that already has POS data, use **Manage menu → Load workbook catalog** to add workbook dishes missing from that device.
 
-## Working as a group
-
-The owner can invite members at [repository collaborators](https://github.com/Seperoth/POS-SYSTEM-ISFINALS/settings/access). Each member accepts the invitation using their own GitHub account.
-
 ```powershell
-git switch develop
+git switch main
+git pull --ff-only
 git switch -c codex/your-change
 # Edit the project, then verify it:
 npm test
@@ -35,15 +32,6 @@ git add .
 git commit -m "Describe your change"
 git push -u origin codex/your-change
 ```
-
-Open a pull request into the group's target branch for review. Group pushes run tests and a web build.
-
-## Independent Android setup
-
-- App identities: `com.seperoth.possystemisfinals` and `com.seperoth.possystemisfinals.dev`. They can coexist with the client app and use separate native storage.
-- Expo owner/project linkage and update URL are removed. OTA updates are disabled, and manual update commands deliberately stop. No client Expo token, signing key or business records were copied.
-- For cloud APK builds or your own updates, create a separate Expo project/account setup and new signing credentials. Configure your own project ID, update channels and runtime versions before enabling OTA. See [ANDROID.md](ANDROID.md).
-- Do not install the original client's APK to test this project: it runs the client app and receives that app's updates.
 
 ## Source baseline
 

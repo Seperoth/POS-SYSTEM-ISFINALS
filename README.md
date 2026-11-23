@@ -1,6 +1,6 @@
 # Restaurant POS with Sales Forecasting
 
-Restaurant POS for the Information Systems final project. A new installation opens with the 60-dish workbook menu and an empty sales history. The catalog uses the workbook's Appetizer, Entree, Drinks, Dessert and Sides categories. Open **Forecast** for daily and weekly dish projections from the KNIME Random Forest model. Use **Import KNIME CSV** to load a new run on the device.
+Restaurant POS for the Information Systems final project. A new installation opens with the 60-dish workbook menu and an empty sales history. The catalog uses the workbook's Appetizer, Entree, Drinks, Dessert and Sides categories. Open **Forecast** for daily and weekly demand estimates from a hybrid of KNIME Random Forest and k-nearest-neighbors regression. Use **Show only in-demand dishes** to see the category leaders or **Import forecast CSV** to load a new run.
 
 This is a standalone repository, not a fork or an automatically synchronized mirror. Your group can alter its content without changing the client's Universal POS. The original task will leave this repository alone unless Jojo explicitly requests changes.
 

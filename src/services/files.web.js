@@ -6,10 +6,32 @@ export async function exportFile(name, text, mime = 'application/json') {
 export const shareFile = exportFile;
 async function importText(accept, maxSize, errorMessage) {
   return new Promise((resolve, reject) => {
-    const input = document.createElement('input'); input.type = 'file'; input.accept = accept;
-    input.oncancel = () => resolve(null);
-    input.onchange = async () => { try { const file = input.files[0]; if (!file) return resolve(null); if (file.size > maxSize) throw new Error(errorMessage); resolve(await file.text()); } catch (e) { reject(e); } };
-    input.click();
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = accept;
+    input.hidden = true;
+    input.oncancel = () => {
+      input.remove();
+      resolve(null);
+    };
+    input.onchange = async () => {
+      try {
+        const file = input.files[0];
+        if (file?.size > maxSize) throw new Error(errorMessage);
+        resolve(file ? await file.text() : null);
+      } catch (error) {
+        reject(error);
+      } finally {
+        input.remove();
+      }
+    };
+    document.body.appendChild(input);
+    try {
+      input.click();
+    } catch (error) {
+      input.remove();
+      reject(error);
+    }
   });
 }
 export const importBackup = () => importText('.json,application/json', 50 * 1024 * 1024, 'Backup exceeds 50 MB.');

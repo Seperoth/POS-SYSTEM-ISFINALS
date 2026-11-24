@@ -14,7 +14,6 @@ import { cancelHeldOrder, resumeHeldOrder } from './domain/held-orders.js';
 import { createBackup, readBackup, salesCsv } from './domain/backup.js';
 import { salesForPeriod, salesSummary } from './domain/sales-report.js';
 import release from '../release.json';
-import Constants from 'expo-constants';
 import { printWorker } from './services/print-worker.js';
 import * as device from './services/device';
 import * as files from './services/files';
@@ -104,7 +103,6 @@ function Workspace({ controller }) {
         <View style={{ flex: 1 }} accessibilityElementsHidden={!wide && orderOpen && tab === 0} importantForAccessibility={!wide && orderOpen && tab === 0 ? 'no-hide-descendants' : 'auto'}>
         <View style={s.header}>
           <T style={[s.bold, { textAlign: 'center' }]}>Restaurant POS</T>
-          {Constants.expoConfig?.extra?.appEnvironment === 'development' && <T style={[s.small, s.muted, { textAlign: 'center' }]}>Development · test data only</T>}
         </View>
         <View style={{ flex: 1 }}>
           {tab === 0 && <MenuScreen {...props} onAdd={addProduct} />}
@@ -279,7 +277,7 @@ function SettingsScreen({ state, controller, mutate, run, notify, modal, backup,
       <Button icon={Download} onPress={() => backup()}>Save full backup to files</Button><Button onPress={() => backup(true)}>Share full backup</Button><Button onPress={importBackup}>Restore from backup</Button><Button onPress={() => backup(false, true)}>Export pre-restore recovery copy</Button>
       <T style={s.small}>Move a backup to another device, a drive, or your Wi-Fi storage. Uninstalling the app removes its local database.</T>
     </View>
-    <View style={[s.panel, { gap: 14 }]}><T style={s.h2}>App updates</T><T>Version {release.version}{Constants.expoConfig?.extra?.appEnvironment === 'development' ? ' · Development' : ''}</T>
+    <View style={[s.panel, { gap: 14 }]}><T style={s.h2}>App updates</T><T>Version {release.version}</T>
       {update.message ? <T>{update.message}</T> : null}<Button disabled={updating} onPress={() => checkUpdates()}>{updating ? 'Checking…' : 'Check for updates'}</Button>{update.status === 'ready' && <Button primary onPress={onRestart}>Apply downloaded update</Button>}
       <Button onPress={() => run(device.installSettings)}>Allow APK updates in Android settings</Button>
       <Button onPress={() => run(async () => { if (!(await device.installPermission())) throw new Error('Allow APK updates in Android settings first.'); const uri = await files.pickApk(); if (uri) await device.installApk(uri); })}>Install newer APK from files</Button>

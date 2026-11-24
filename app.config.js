@@ -5,13 +5,13 @@ if (!['development', 'production'].includes(environment)) throw new Error('APP_E
 const development = environment === 'development';
 export default {
   expo: {
-    name: development ? 'Restaurant POS Dev' : 'Restaurant POS', slug: 'pos-system-isfinals', version: release.version,
+    name: 'Restaurant POS', slug: 'pos-system-isfinals', version: release.version,
     orientation: 'default', userInterfaceStyle: 'light', scheme: development ? 'pos-isfinals-dev' : 'pos-isfinals',
     platforms: ['android', 'web'],
     android: { package: `com.seperoth.possystemisfinals${development ? '.dev' : ''}`, versionCode: Number(process.env.POS_VERSION_CODE || release.androidVersionCode),
       permissions: ['android.permission.BLUETOOTH', 'android.permission.BLUETOOTH_ADMIN', 'android.permission.BLUETOOTH_CONNECT', 'android.permission.REQUEST_INSTALL_PACKAGES'],
       allowBackup: false },
-    web: { name: development ? 'Restaurant POS Development' : 'Restaurant POS', bundler: 'metro', output: 'single' },
+    web: { name: 'Restaurant POS', bundler: 'metro', output: 'single' },
     plugins: ['expo-sqlite', 'expo-font', 'expo-sharing', 'expo-status-bar', './plugins/with-pos-device.cjs'],
     // Independent group project. Native changes require a new runtime and signed APK.
     runtimeVersion: development ? release.developmentRuntime : release.productionRuntime,

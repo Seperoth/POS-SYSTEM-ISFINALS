@@ -14,7 +14,7 @@ async function isRunning() {
     });
     return (
       response.ok &&
-      (await response.text()).includes("<title>POS ISFINALS")
+      (await response.text()).includes("<title>Restaurant POS</title>")
     );
   } catch {
     return false;
